@@ -11,6 +11,9 @@ dependencies:
   react-native:
     specifier: 0.72.7
     version: 0.72.7(@babel/core@7.20.2)(@babel/preset-env@7.20.2)(react@18.2.0)
+  react-native-splash-screen:
+    specifier: ^3.3.0
+    version: 3.3.0(react-native@0.72.7)
 
 devDependencies:
   '@babel/core':
@@ -6521,6 +6524,14 @@ packages:
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+
+  /react-native-splash-screen@3.3.0(react-native@0.72.7):
+    resolution: {integrity: sha512-rGjt6HkoSXxMqH4SQUJ1gnPQlPJV8+J47+4yhgTIan4bVvAwJhEeJH7wWt9hXSdH4+VfwTS0GTaflj1Tw83IhA==}
+    peerDependencies:
+      react-native: '>=0.57.0'
+    dependencies:
+      react-native: 0.72.7(@babel/core@7.20.2)(@babel/preset-env@7.20.2)(react@18.2.0)
+    dev: false
 
   /react-native@0.72.7(@babel/core@7.20.2)(@babel/preset-env@7.20.2)(react@18.2.0):
     resolution: {integrity: sha512-dqVFojOO9rOvyFbbM3/v9/GJR355OSuBhEY4NQlMIRc2w0Xch5MT/2uPoq3+OvJ+5h7a8LFAco3fucSffG0FbA==}
