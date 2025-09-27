@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "react": "18.3.1",
-    "react-native": "0.74.7",
+    "react-native": "0.75.5",
     "react-native-bootsplash": "^5.5.3"
   },
   "devDependencies": {
@@ -36,10 +36,10 @@
     "@babel/runtime": "^7.28.4",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "@react-native/babel-preset": "^0.74.89",
-    "@react-native/eslint-config": "^0.74.89",
-    "@react-native/metro-config": "^0.74.89",
-    "@react-native/typescript-config": "^0.74.89",
+    "@react-native/babel-preset": "^0.75.5",
+    "@react-native/eslint-config": "^0.75.5",
+    "@react-native/metro-config": "^0.75.5",
+    "@react-native/typescript-config": "^0.75.5",
     "@types/react": "^18.3.24",
     "@types/react-test-renderer": "^18.3.1",
     "@typescript-eslint/parser": "^8.44.1",
