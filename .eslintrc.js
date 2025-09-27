@@ -1,6 +1,7 @@
 module.exports = {
   root: true,
   extends: ['@react-native'],
+  parser: '@typescript-eslint/parser',
   rules: {
     'react/jsx-uses-react': 0,
     'react/react-in-jsx-scope': 0,
