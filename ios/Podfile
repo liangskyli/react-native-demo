@@ -17,15 +17,8 @@ end
 target 'DemoProject' do
   config = use_native_modules!
 
-  # Flags change depending on the env values.
-  flags = get_default_flags()
-
   use_react_native!(
     :path => config[:reactNativePath],
-    # Hermes is now enabled by default. Disable by setting this flag to false.
-    :hermes_enabled => flags[:hermes_enabled],
-    :fabric_enabled => flags[:fabric_enabled],
-
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
@@ -40,20 +33,8 @@ target 'DemoProject' do
     react_native_post_install(
       installer,
       config[:reactNativePath],
-      :mac_catalyst_enabled => false
+      :mac_catalyst_enabled => false,
+      # :ccache_enabled => true
     )
-
-    # 修复编译警告
-    installer.pods_project.targets.each do |target|
-      target.build_configurations.each do |config|
-        # 禁用严格原型检查警告
-        config.build_settings['CLANG_WARN_STRICT_PROTOTYPES'] = 'NO'
-        # 禁用已弃用 API 警告
-        config.build_settings['CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS'] = 'NO'
-        # 禁用其他相关警告
-        config.build_settings['CLANG_WARN_DEPRECATED'] = 'NO'
-        config.build_settings['GCC_WARN_INHIBIT_ALL_WARNINGS'] = 'YES'
-      end
-    end
   end
 end
