@@ -1,3 +1,20 @@
 {
-  "extends": "@react-native/typescript-config"
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+  },
+  "include": [
+    "./src/**/*",
+    "nativewind-env.d.ts",
+    "*.mjs",
+    ".*.mjs",
+    "*.js",
+    ".*.js",
+    "*.ts"
+  ],
+  "exclude": [
+    "**/Pods/**"
+  ]
 }
