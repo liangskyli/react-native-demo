@@ -29,6 +29,9 @@ importers:
       '@react-navigation/stack':
         specifier: ^7.4.8
         version: 7.4.8(35c6f8a6b0195f81809e14c2c28118ed)
+      '@shopify/flash-list':
+        specifier: ^2.1.0
+        version: 2.1.0(@babel/runtime@7.28.4)(react-native@0.80.2(@babel/core@7.28.4)(@react-native-community/cli@19.1.1(typescript@5.9.2))(@types/react@19.1.15)(react@19.1.0))(react@19.1.0)
       axios:
         specifier: ^1.12.2
         version: 1.12.2
@@ -1552,6 +1555,13 @@ packages:
       react-native-gesture-handler: '>= 2.0.0'
       react-native-safe-area-context: '>= 4.0.0'
       react-native-screens: '>= 4.0.0'
+
+  '@shopify/flash-list@2.1.0':
+    resolution: {integrity: sha512-/EIQlptG456yM5o9qNmNsmaZEFEOGvG3WGyb6GUAxSLlcKUGlPUkPI2NLW5wQSDEY4xSRa5zocUI+9xwmsM4Kg==}
+    peerDependencies:
+      '@babel/runtime': '*'
+      react: '*'
+      react-native: '*'
 
   '@sideway/address@4.1.5':
     resolution: {integrity: sha512-IqO/DUQHUkPeixNQ8n0JA6102hT9CmaljNTPmQ1u8MEhBo/R4Q8eKLN/vGZxuebwOroDB4cbpjheD4+/sKFK4Q==}
@@ -7738,9 +7748,7 @@ snapshots:
       metro-runtime: 0.82.5
     transitivePeerDependencies:
       - '@babel/core'
-      - bufferutil
       - supports-color
-      - utf-8-validate
 
   '@react-native/new-app-screen@0.80.2(@types/react@19.1.15)(react-native@0.80.2(@babel/core@7.28.4)(@react-native-community/cli@19.1.1(typescript@5.9.2))(@types/react@19.1.15)(react@19.1.0))(react@19.1.0)':
     dependencies:
@@ -7835,6 +7843,12 @@ snapshots:
       react-native-screens: 4.16.0(react-native@0.80.2(@babel/core@7.28.4)(@react-native-community/cli@19.1.1(typescript@5.9.2))(@types/react@19.1.15)(react@19.1.0))(react@19.1.0)
     transitivePeerDependencies:
       - '@react-native-masked-view/masked-view'
+
+  '@shopify/flash-list@2.1.0(@babel/runtime@7.28.4)(react-native@0.80.2(@babel/core@7.28.4)(@react-native-community/cli@19.1.1(typescript@5.9.2))(@types/react@19.1.15)(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@babel/runtime': 7.28.4
+      react: 19.1.0
+      react-native: 0.80.2(@babel/core@7.28.4)(@react-native-community/cli@19.1.1(typescript@5.9.2))(@types/react@19.1.15)(react@19.1.0)
 
   '@sideway/address@4.1.5':
     dependencies:

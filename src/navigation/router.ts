@@ -33,4 +33,9 @@ export const hasLoginScreenRouteConfigList: ScreenRouteConfigList = [
     options: { title: '详情页' },
     getComponent: () => require('@/screens/detail').default,
   },
+  {
+    name: Paths.virtualList,
+    options: { title: '虚拟列表' },
+    getComponent: () => require('@/screens/virtual-list').default,
+  },
 ];

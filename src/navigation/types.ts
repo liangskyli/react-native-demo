@@ -34,6 +34,7 @@ export type RootNativeStackParamList = {
   [Paths.homeTabBar]?: NavigatorScreenParams<HomeTabParamList>;
   [Paths.detail]: { id: string };
   [Paths.webView]: { uri: string };
+  [Paths.virtualList]: { type: 'list1' | 'list2' };
 };
 
 export type RootNativeStackNavigationProp<

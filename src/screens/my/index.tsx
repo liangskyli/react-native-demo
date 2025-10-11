@@ -22,6 +22,18 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
       <View className="items-center gap-1">
         <Text>my Screen</Text>
         <Button
+          title="VirtualList 列表分页滚动"
+          onPress={() => {
+            navigation.navigate(Paths.virtualList, { type: 'list1' });
+          }}
+        />
+        <Button
+          title="VirtualList 聊天消息滚动"
+          onPress={() => {
+            navigation.navigate(Paths.virtualList, { type: 'list2' });
+          }}
+        />
+        <Button
           title="popup"
           onPress={() => {
             setPopupVisible(true);
