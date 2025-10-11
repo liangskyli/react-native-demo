@@ -1,6 +1,6 @@
-import type { PopupProps } from '@/components/popup';
-import Popup from '@/components/popup';
 import classConfig from '@/components/popup/class-config.ts';
+import type { PopupProps } from '@/components/popup/popup.tsx';
+import Popup from '@/components/popup/popup.tsx';
 import { portalStore } from '@/components/portal/use-portal-store.ts';
 import { cn } from '@/styles/tool.ts';
 import { merge } from 'lodash';
