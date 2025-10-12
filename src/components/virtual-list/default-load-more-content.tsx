@@ -1,3 +1,4 @@
+import { LoadingIcon } from '@/components/loading';
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 
@@ -27,7 +28,7 @@ const DefaultLoadMoreContent = (props: LoadMoreContentProps) => {
           </Pressable>
         </View>
       ) : (
-        <Text className="text-sm text-gray-500">加载中...</Text>
+        <LoadingIcon visibleAnimated width={20} height={20} />
       )}
     </View>
   );
