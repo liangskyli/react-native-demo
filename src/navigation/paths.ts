@@ -7,4 +7,5 @@ export const enum Paths {
   detail = 'detail',
   webView = 'webView',
   virtualList = 'virtualList',
+  logViewer = 'logViewer',
 }

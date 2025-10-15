@@ -68,6 +68,12 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
           }}
         />
         <Button
+          title="查看日志文件"
+          onPress={() => {
+            navigation.navigate(Paths.logViewer);
+          }}
+        />
+        <Button
           title="Login out"
           onPress={() => {
             cleanLoginData();

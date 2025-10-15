@@ -2,6 +2,7 @@ import Portal from '@/components/portal';
 import ApplicationNavigator from '@/navigation';
 import { useUserStore } from '@/store/modules/use-user-store.ts';
 import '@/styles/tailwind.css';
+import '@/utils/logger/logger.ts';
 import { StrictMode, useEffect } from 'react';
 import BootSplash from 'react-native-bootsplash';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
@@ -14,11 +15,12 @@ function App() {
       await initLoginStatus();
       // 模拟初始化任务
       await new Promise(resolve => setTimeout(resolve, 500));
+      console.log('应用初始化完成');
     };
 
     init().finally(async () => {
       await BootSplash.hide({ fade: true });
-      console.log('BootSplash has been hidden successfully');
+      console.log('启动屏幕已隐藏');
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

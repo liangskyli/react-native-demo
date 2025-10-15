@@ -38,4 +38,9 @@ export const hasLoginScreenRouteConfigList: ScreenRouteConfigList = [
     options: { title: '虚拟列表' },
     getComponent: () => require('@/screens/virtual-list').default,
   },
+  {
+    name: Paths.logViewer,
+    options: { title: '日志查看器' },
+    getComponent: () => require('@/screens/log-viewer').default,
+  },
 ];

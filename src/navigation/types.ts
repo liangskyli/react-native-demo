@@ -35,6 +35,7 @@ export type RootNativeStackParamList = {
   [Paths.detail]: { id: string };
   [Paths.webView]: { uri: string };
   [Paths.virtualList]: { type: 'list1' | 'list2' };
+  [Paths.logViewer]: undefined;
 };
 
 export type RootNativeStackNavigationProp<
