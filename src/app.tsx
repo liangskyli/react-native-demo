@@ -4,6 +4,7 @@ import { useUserStore } from '@/store/modules/use-user-store.ts';
 import '@/styles/tailwind.css';
 import { StrictMode, useEffect } from 'react';
 import BootSplash from 'react-native-bootsplash';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 function App() {
   const { initLoginStatus } = useUserStore();
@@ -24,9 +25,11 @@ function App() {
 
   return (
     <StrictMode>
-      <Portal>
-        <ApplicationNavigator />
-      </Portal>
+      <KeyboardProvider>
+        <Portal>
+          <ApplicationNavigator />
+        </Portal>
+      </KeyboardProvider>
     </StrictMode>
   );
 }

@@ -1,6 +1,7 @@
-import Button from '@/components/button';
+import KeyboardAwareView from '@/components/keyboard-aware-view';
 import type { VirtualListProps } from '@/components/virtual-list';
 import VirtualList from '@/components/virtual-list';
+import InputView from '@/screens/virtual-list/input-view.tsx';
 import { useRef, useState } from 'react';
 import { Text, View } from 'react-native';
 
@@ -72,6 +73,27 @@ export default function List2() {
     setMessages([...olderMessages, ...messages]);
     setLoadingMoreTop(false);
   };
+  const [inputValue, setInputValue] = useState('');
+  const changeTextHandler = (text: string) => {
+    setInputValue(text);
+  };
+  const sendMessage = () => {
+    if (!inputValue) return;
+    setMessages([
+      ...messages,
+      {
+        id: `id-${messages.length}`,
+        type: 'text',
+        content: inputValue,
+        timestamp: Date.now(),
+        user: {
+          id: 'id1',
+          name: 'name1',
+        },
+      },
+    ]);
+    setInputValue('');
+  };
 
   return (
     <>
@@ -82,42 +104,36 @@ export default function List2() {
         </Text>
       </View>
 
-      <VirtualList
-        ref={listRef as any}
-        keyExtractor={item => item.id}
-        data={messages}
-        renderItem={item => <ItemView item={item.item} />}
-        maintainVisibleContentPosition={{
-          startRenderingFromBottom: true,
-          autoscrollToBottomThreshold: 0.2,
-        }}
-        // 顶部加载更多
-        loadMoreTop={handleLoadMoreTop}
-        hasMoreTop={hasMoreTop}
-        getItemType={item => {
-          return item.type;
-        }}
-      />
-      <View>
-        <Button
-          title="add"
-          onPress={() => {
-            setMessages([
-              ...messages,
-              {
-                id: `id-${messages.length}`,
-                type: 'text',
-                content: `新内容${messages.length}`,
-                timestamp: Date.now(),
-                user: {
-                  id: 'id1',
-                  name: 'name1',
-                },
-              },
-            ]);
+      <KeyboardAwareView className="flex-1">
+        <VirtualList
+          ref={listRef as any}
+          keyExtractor={item => item.id}
+          data={messages}
+          renderItem={item => <ItemView item={item.item} />}
+          maintainVisibleContentPosition={{
+            startRenderingFromBottom: true,
+            //autoscrollToBottomThreshold: 0.5,
+          }}
+          // 顶部加载更多
+          loadMoreTop={handleLoadMoreTop}
+          hasMoreTop={hasMoreTop}
+          getItemType={item => {
+            return item.type;
           }}
         />
-      </View>
+
+        <InputView
+          value={inputValue}
+          changeTextHandler={changeTextHandler}
+          sendMessage={sendMessage}
+          onFocus={() => {
+            listRef.current?.scrollToEnd();
+          }}
+          onBlur={() => {
+            listRef.current?.scrollToEnd();
+          }}
+        />
+      </KeyboardAwareView>
     </>
   );
 }
