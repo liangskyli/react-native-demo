@@ -226,9 +226,7 @@ const LogViewerScreen = () => {
                 data={logLines}
                 renderItem={renderLogLine}
                 keyExtractor={(item, index) => `log-line-${index}`}
-                maintainVisibleContentPosition={{
-                  startRenderingFromBottom: true,
-                }}
+                initialScrollIndex={logLines.length - 1}
               />
             )}
           </View>
