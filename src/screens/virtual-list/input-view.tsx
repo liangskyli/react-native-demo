@@ -16,7 +16,7 @@ const InputView = (props: InputViewProps) => {
       <TextInput
         {...inputProps}
         ref={inputRef}
-        className="h-[40px] flex-1 rounded-lg border border-gray-200 bg-white px-4 py-3"
+        className="h-[40px] flex-1 rounded-lg border border-gray-200 bg-white px-4 py-3 text-xs"
         onChangeText={changeTextHandler}
         onSubmitEditing={sendMessage}
         value={value}

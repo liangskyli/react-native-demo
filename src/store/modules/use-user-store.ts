@@ -60,22 +60,29 @@ export const userStore = createStore<UserStore>()(
       await AsyncStorage.removeItem(accessTokenKey);
     },
     initLoginStatus: async () => {
-      const accessToken = await AsyncStorage.getItem(accessTokenKey);
+      let isLaunched = false;
       let userInfo: State['loginData']['userInfo'];
       let newAccessToken = '';
-      if (accessToken) {
-        const result = await requestApi.isLogin({
-          params: { accessToken },
-        });
-        newAccessToken = result.data.accessToken;
-        userInfo = result.data.userInfo;
-        await storageAccessToken(newAccessToken);
+      try {
+        const accessToken = await AsyncStorage.getItem(accessTokenKey);
+        if (accessToken) {
+          const result = await requestApi.isLogin({
+            params: { accessToken },
+          });
+          newAccessToken = result.data.accessToken;
+          userInfo = result.data.userInfo;
+          await storageAccessToken(newAccessToken);
+        }
+        isLaunched = true;
+      } catch (error) {
+        console.log('initLoginStatus error:', error);
+        isLaunched = true;
       }
 
       set(state => {
         state.isLogin = !!userInfo;
         state.loginData = { accessToken: newAccessToken, userInfo };
-        state.isLaunched = true;
+        state.isLaunched = isLaunched;
       });
     },
   })),

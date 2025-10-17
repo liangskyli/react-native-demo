@@ -22,6 +22,7 @@ function SafeScreen({
     <SafeAreaView {...props} mode="padding">
       <StatusBar
         barStyle="dark-content"
+        translucent={true}
         backgroundColor={DefaultTheme.colors.background}
       />
       <ErrorBoundary onReset={onResetError}>

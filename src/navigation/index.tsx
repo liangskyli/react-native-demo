@@ -58,6 +58,7 @@ const ApplicationNavigator = () => {
             <RootNativeStack.Screen
               name={Paths.launch}
               component={LaunchScreen}
+              options={{ headerShown: false }}
             />
           )}
         </RootNativeStack.Navigator>

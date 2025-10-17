@@ -14,7 +14,7 @@ function App() {
     const init = async () => {
       await initLoginStatus();
       // 模拟初始化任务
-      await new Promise(resolve => setTimeout(resolve, 500));
+      await new Promise(resolve => setTimeout(resolve, 10));
       console.log('应用初始化完成');
     };
 
