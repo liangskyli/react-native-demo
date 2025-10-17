@@ -1,6 +1,6 @@
 import requestApi from '@/services/api';
 import config from '@/utils/config.ts';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import baseStorage from '@/utils/storage/base-storage.ts';
 import { createStore, useStore } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -16,19 +16,17 @@ type State = {
 };
 
 type Action = {
-  updateToken: (
-    accessToken: State['loginData']['accessToken'],
-  ) => Promise<void>;
-  saveLoginData: (data: Required<State['loginData']>) => Promise<void>;
-  cleanLoginData: () => Promise<void>;
+  updateToken: (accessToken: State['loginData']['accessToken']) => void;
+  saveLoginData: (data: Required<State['loginData']>) => void;
+  cleanLoginData: () => void;
   initLoginStatus: () => Promise<void>;
 };
 
 type UserStore = State & Action;
 
 const { accessToken: accessTokenKey } = config.asyncStorageKeys;
-const storageAccessToken = async (accessToken: string) => {
-  await AsyncStorage.setItem(accessTokenKey, accessToken);
+const storageAccessToken = (accessToken: string) => {
+  baseStorage.set(accessTokenKey, accessToken);
 };
 
 export const userStore = createStore<UserStore>()(
@@ -38,40 +36,40 @@ export const userStore = createStore<UserStore>()(
       accessToken: '',
     },
     isLogin: false,
-    updateToken: async accessToken => {
+    updateToken: accessToken => {
       set(state => {
         state.loginData.accessToken = accessToken;
         state.isLogin = true;
       });
-      await storageAccessToken(accessToken);
+      storageAccessToken(accessToken);
     },
-    saveLoginData: async data => {
+    saveLoginData: data => {
       set(state => {
         state.loginData = data;
         state.isLogin = true;
       });
-      await storageAccessToken(data.accessToken);
+      storageAccessToken(data.accessToken);
     },
-    cleanLoginData: async () => {
+    cleanLoginData: () => {
       set(state => {
         state.loginData = { accessToken: '', userInfo: undefined };
         state.isLogin = false;
       });
-      await AsyncStorage.removeItem(accessTokenKey);
+      baseStorage.delete(accessTokenKey);
     },
     initLoginStatus: async () => {
       let isLaunched = false;
       let userInfo: State['loginData']['userInfo'];
       let newAccessToken = '';
       try {
-        const accessToken = await AsyncStorage.getItem(accessTokenKey);
+        const accessToken = baseStorage.getString(accessTokenKey);
         if (accessToken) {
           const result = await requestApi.isLogin({
             params: { accessToken },
           });
           newAccessToken = result.data.accessToken;
           userInfo = result.data.userInfo;
-          await storageAccessToken(newAccessToken);
+          storageAccessToken(newAccessToken);
         }
         isLaunched = true;
       } catch (error) {
