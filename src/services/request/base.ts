@@ -1,6 +1,7 @@
 import { BUILD_TIMESTAMP } from '@/build-info.ts';
 import { ajaxLoadingStore } from '@/store';
 import { userStore } from '@/store/modules/use-user-store.ts';
+import config from '@/utils/config.ts';
 import type {
   Context,
   IRequestConfig,
@@ -9,9 +10,11 @@ import type {
 import { axiosRequest } from '@liangskyli/axios-request';
 import dayjs from 'dayjs';
 
+const { serverHost } = config;
+
 export type IBaseJsonData<T = unknown> = {
-  code: number;
-  message?: string;
+  retCode: number;
+  retMsg?: string;
   data: T;
 };
 const request = axiosRequest({
@@ -19,6 +22,7 @@ const request = axiosRequest({
     headers: {
       'Content-Type': 'application/json',
     },
+    baseURL: serverHost,
   },
   loadingMiddlewareConfig: {
     showLoading: () => {
@@ -29,7 +33,7 @@ const request = axiosRequest({
     },
   },
   serializedResponseMiddlewareConfig: {
-    serializedResponseCodeKey: 'code',
+    serializedResponseCodeKey: 'retCode',
     serializedResponseSuccessCode: 0,
     serializedResponseDataKey: 'data',
   },
@@ -64,3 +68,4 @@ const responseLogMiddlewares: Middleware<
 request.middlewares.response.use(responseLogMiddlewares);
 
 export default request;
+export type { IRequestConfig };

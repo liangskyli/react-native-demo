@@ -15,6 +15,7 @@
     "lint": "eslint .",
     "start": "pnpm injectBuildTime && react-native start",
     "dev:mock-server": "pnpm mock-server -c mock.config.ts",
+    "mock-gen": "pnpm http-mock-gen -c mock-gen.config.ts",
     "test": "jest"
   },
   "lint-staged": {
@@ -68,6 +69,7 @@
     "@babel/runtime": "^7.28.4",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
+    "@liangskyli/http-mock-gen": "^6.0.0",
     "@liangskyli/mock": "^6.0.0",
     "@react-native-community/cli": "19.1.1",
     "@react-native-community/cli-platform-android": "19.1.1",

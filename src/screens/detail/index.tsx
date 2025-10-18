@@ -3,7 +3,7 @@ import Button from '@/components/button';
 import SafeScreen from '@/components/safe-screen';
 import type { Paths } from '@/navigation/paths.ts';
 import type { RootNativeStackScreenProps } from '@/navigation/types.ts';
-import requestApi from '@/services/api';
+import { requestApi } from '@/services/gen-example/schema-api/request-api.ts';
 import { Text, View } from 'react-native';
 
 const DetailScreen = (props: RootNativeStackScreenProps<Paths.detail>) => {
@@ -27,9 +27,8 @@ const DetailScreen = (props: RootNativeStackScreenProps<Paths.detail>) => {
         <Button
           title="get axios data"
           onPress={async () => {
-            await requestApi.getList({
-              params: { id: 'id' },
-              // customOptions: { loadingEnabled: false },
+            await requestApi['/v1/building/get-list'].get({
+              params: { activityId: 1 },
             });
           }}
         />
