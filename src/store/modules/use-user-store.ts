@@ -16,6 +16,7 @@ type State = {
 };
 
 type Action = {
+  updateIsLaunched: (isLaunched: boolean) => void;
   updateToken: (accessToken: State['loginData']['accessToken']) => void;
   saveLoginData: (data: Required<State['loginData']>) => void;
   cleanLoginData: () => void;
@@ -36,6 +37,11 @@ export const userStore = createStore<UserStore>()(
       accessToken: '',
     },
     isLogin: false,
+    updateIsLaunched: isLaunched => {
+      set(state => {
+        state.isLaunched = isLaunched;
+      });
+    },
     updateToken: accessToken => {
       set(state => {
         state.loginData.accessToken = accessToken;
@@ -58,29 +64,21 @@ export const userStore = createStore<UserStore>()(
       baseStorage.delete(accessTokenKey);
     },
     initLoginStatus: async () => {
-      let isLaunched = false;
       let userInfo: State['loginData']['userInfo'];
       let newAccessToken = '';
-      try {
-        const accessToken = baseStorage.getString(accessTokenKey);
-        if (accessToken) {
-          const result = await requestApi.isLogin({
-            params: { accessToken },
-          });
-          newAccessToken = result.data.accessToken;
-          userInfo = result.data.userInfo;
-          storageAccessToken(newAccessToken);
-        }
-        isLaunched = true;
-      } catch (error) {
-        console.log('initLoginStatus error:', error);
-        isLaunched = true;
+      const accessToken = baseStorage.getString(accessTokenKey);
+      if (accessToken) {
+        const result = await requestApi.isLogin({
+          params: { accessToken },
+        });
+        newAccessToken = result.data.accessToken;
+        userInfo = result.data.userInfo;
+        storageAccessToken(newAccessToken);
       }
 
       set(state => {
         state.isLogin = !!userInfo;
         state.loginData = { accessToken: newAccessToken, userInfo };
-        state.isLaunched = isLaunched;
       });
     },
   })),

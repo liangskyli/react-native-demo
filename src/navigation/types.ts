@@ -8,10 +8,27 @@ import type {
   TypeBag,
   TypedNavigator,
 } from '@react-navigation/native';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type {
+  NativeStackNavigationOptions,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 import type { NavigationState, ParamListBase } from '@react-navigation/routers';
 import type { ComponentType } from 'react';
 import type { Paths } from './paths';
+
+export type HomeTabParamList = {
+  [Paths.home]: undefined;
+  [Paths.my]: undefined;
+};
+
+export type RootNativeStackParamList = {
+  [Paths.login]: undefined;
+  [Paths.homeTabBar]?: NavigatorScreenParams<HomeTabParamList>;
+  [Paths.detail]: { id: string };
+  [Paths.webView]: { uri: string };
+  [Paths.virtualList]: { type: 'list1' | 'list2' };
+  [Paths.logViewer]: undefined;
+};
 
 export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
   CompositeScreenProps<
@@ -22,21 +39,6 @@ export type RootNativeStackScreenProps<
   RouteName extends keyof RootNativeStackParamList,
   NavigatorID extends string | undefined = undefined,
 > = NativeStackScreenProps<RootNativeStackParamList, RouteName, NavigatorID>;
-
-export type HomeTabParamList = {
-  [Paths.home]: undefined;
-  [Paths.my]: undefined;
-};
-
-export type RootNativeStackParamList = {
-  [Paths.launch]: undefined;
-  [Paths.login]: undefined;
-  [Paths.homeTabBar]?: NavigatorScreenParams<HomeTabParamList>;
-  [Paths.detail]: { id: string };
-  [Paths.webView]: { uri: string };
-  [Paths.virtualList]: { type: 'list1' | 'list2' };
-  [Paths.logViewer]: undefined;
-};
 
 export type RootNativeStackNavigationProp<
   RouteName extends keyof RootNativeStackParamList,
@@ -76,3 +78,8 @@ export type ScreenRouteConfig<
     >
   >['Screen']
 >[0];
+
+export type ScreenRouteList = ScreenRouteConfig<
+  RootNativeStackParamList,
+  NativeStackNavigationOptions
+>[];

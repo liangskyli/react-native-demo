@@ -1,5 +1,4 @@
 export const enum Paths {
-  launch = 'launch',
   login = 'login',
   homeTabBar = 'homeTabBar',
   home = 'home',

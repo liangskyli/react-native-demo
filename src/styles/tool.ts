@@ -7,7 +7,7 @@ const defaultTwMerge = (className: string) => {
   return extendTailwindMerge({})(className);
 };
 type ITwMerge = (className: string) => string;
-let twMerge: ITwMerge = defaultTwMerge;
+const twMerge: ITwMerge = defaultTwMerge;
 
 // 创建LRU缓存实例
 const CN_CACHE_ID = 'cn-cache';
