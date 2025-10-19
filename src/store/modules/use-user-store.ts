@@ -1,6 +1,7 @@
 import requestApi from '@/services/api';
-import config from '@/utils/config.ts';
-import baseStorage from '@/utils/storage/base-storage.ts';
+import baseStorage, {
+  baseStorageConfig,
+} from '@/utils/storage/base-storage.ts';
 import { createStore, useStore } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -25,7 +26,7 @@ type Action = {
 
 type UserStore = State & Action;
 
-const { accessToken: accessTokenKey } = config.asyncStorageKeys;
+const { accessToken: accessTokenKey } = baseStorageConfig;
 const storageAccessToken = (accessToken: string) => {
   baseStorage.set(accessTokenKey, accessToken);
 };

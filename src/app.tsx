@@ -2,6 +2,7 @@ import Loading from '@/components/loading';
 import Portal from '@/components/portal';
 import ApplicationNavigator from '@/navigation';
 import { useAjaxLoadingStore } from '@/store';
+import { useEnvStore } from '@/store/modules/use-env-store.ts';
 import { useUserStore } from '@/store/modules/use-user-store.ts';
 import '@/styles/tailwind.css';
 import '@/utils/logger/logger.ts';
@@ -15,9 +16,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 function App() {
   const { isLoading } = useAjaxLoadingStore();
   const { initLoginStatus, updateIsLaunched, isLaunched } = useUserStore();
+  const { initEnvEnumType } = useEnvStore();
   // 添加启动屏幕隐藏逻辑
   useEffect(() => {
     const init = async () => {
+      initEnvEnumType();
       await initLoginStatus();
       // 模拟初始化任务
       await new Promise(resolve => setTimeout(resolve, 10));

@@ -1,7 +1,7 @@
 import { BUILD_TIMESTAMP } from '@/build-info.ts';
 import { ajaxLoadingStore } from '@/store';
+import { envStore } from '@/store/modules/use-env-store.ts';
 import { userStore } from '@/store/modules/use-user-store.ts';
-import config from '@/utils/config.ts';
 import type {
   Context,
   IRequestConfig,
@@ -9,8 +9,6 @@ import type {
 } from '@liangskyli/axios-request';
 import { axiosRequest } from '@liangskyli/axios-request';
 import dayjs from 'dayjs';
-
-const { serverHost } = config;
 
 export type IBaseJsonData<T = unknown> = {
   retCode: number;
@@ -22,7 +20,6 @@ const request = axiosRequest({
     headers: {
       'Content-Type': 'application/json',
     },
-    baseURL: serverHost,
   },
   loadingMiddlewareConfig: {
     showLoading: () => {
@@ -39,7 +36,7 @@ const request = axiosRequest({
   },
   ShowErrorMiddlewareConfig: {
     showError: (err, ctx) => {
-      console.log('showError:', err, ctx);
+      console.error('showError:', err, ctx);
     },
   },
 });
@@ -48,6 +45,7 @@ const requestProcessMiddlewares: Middleware<
   Context<IRequestConfig, IBaseJsonData>
 > = async (ctx, next) => {
   const { config } = ctx;
+  config.baseURL = envStore.getState().getServerHost('default');
   const { accessToken } = userStore.getState().loginData;
   config.headers!.Authorization = `Bearer ${accessToken}`;
   // add buildTime to url params
