@@ -4,9 +4,11 @@ import Popup from '@/components/popup';
 import Radio from '@/components/radio';
 import SafeScreen from '@/components/safe-screen';
 import Toast from '@/components/toast';
+import useMultipleTrigger from '@/hooks/use-multiple-trigger.tsx';
 import { Paths } from '@/navigation/paths.ts';
 import type { HomeTabScreenProps } from '@/navigation/types.ts';
 import { useUserStore } from '@/store/modules/use-user-store.ts';
+import { popUpSetEnvEnum } from '@/utils/change-env';
 import { useState } from 'react';
 import { Text, View } from 'react-native';
 
@@ -22,6 +24,12 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
   const handleSelectionChange = (selected: string[]) => {
     console.log('当前选中:', selected);
   };
+  const { run: onClickPopUpEnv } = useMultipleTrigger(
+    () => {
+      popUpSetEnvEnum();
+    },
+    { times: 6 },
+  );
 
   return (
     <SafeScreen
@@ -67,19 +75,9 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
           }}
         />
         <Button
-          title="popup method"
+          title="连续点6次"
           onPress={() => {
-            const { close } = Popup.show(
-              <View className="flex-1 items-center p-4">
-                <Text className="text-[16px]">Popup内容</Text>
-                <Button
-                  title="关闭"
-                  onPress={() => {
-                    close();
-                  }}
-                />
-              </View>,
-            );
+            onClickPopUpEnv();
           }}
         />
         <Button
