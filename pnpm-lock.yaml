@@ -68,6 +68,9 @@ importers:
       react-native-bootsplash:
         specifier: ^6.3.10
         version: 6.3.10(react-native@0.80.2(@babel/core@7.28.4)(@react-native-community/cli@19.1.1(typescript@5.9.2))(@types/react@19.1.15)(react@19.1.0))(react@19.1.0)
+      react-native-device-info:
+        specifier: ^14.1.1
+        version: 14.1.1(react-native@0.80.2(@babel/core@7.28.4)(@react-native-community/cli@19.1.1(typescript@5.9.2))(@types/react@19.1.15)(react@19.1.0))
       react-native-gesture-handler:
         specifier: ^2.28.0
         version: 2.28.0(react-native@0.80.2(@babel/core@7.28.4)(@react-native-community/cli@19.1.1(typescript@5.9.2))(@types/react@19.1.15)(react@19.1.0))(react@19.1.0)
@@ -5600,6 +5603,11 @@ packages:
         optional: true
       react-native-svg:
         optional: true
+
+  react-native-device-info@14.1.1:
+    resolution: {integrity: sha512-lXFpe6DJmzbQXNLWxlMHP2xuTU5gwrKAvI8dCAZuERhW9eOXSubOQIesk9lIBnsi9pI19GMrcpJEvs4ARPRYmw==}
+    peerDependencies:
+      react-native: '*'
 
   react-native-gesture-handler@2.28.0:
     resolution: {integrity: sha512-0msfJ1vRxXKVgTgvL+1ZOoYw3/0z1R+Ked0+udoJhyplC2jbVKIJ8Z1bzWdpQRCV3QcQ87Op0zJVE5DhKK2A0A==}
@@ -13335,6 +13343,10 @@ snapshots:
       react-native-svg: 15.13.0(react-native@0.80.2(@babel/core@7.28.4)(@react-native-community/cli@19.1.1(typescript@5.9.2))(@types/react@19.1.15)(react@19.1.0))(react@19.1.0)
     transitivePeerDependencies:
       - supports-color
+
+  react-native-device-info@14.1.1(react-native@0.80.2(@babel/core@7.28.4)(@react-native-community/cli@19.1.1(typescript@5.9.2))(@types/react@19.1.15)(react@19.1.0)):
+    dependencies:
+      react-native: 0.80.2(@babel/core@7.28.4)(@react-native-community/cli@19.1.1(typescript@5.9.2))(@types/react@19.1.15)(react@19.1.0)
 
   react-native-gesture-handler@2.28.0(react-native@0.80.2(@babel/core@7.28.4)(@react-native-community/cli@19.1.1(typescript@5.9.2))(@types/react@19.1.15)(react@19.1.0))(react@19.1.0):
     dependencies:

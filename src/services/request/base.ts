@@ -1,5 +1,6 @@
 import { BUILD_TIMESTAMP } from '@/build-info.ts';
 import { ajaxLoadingStore } from '@/store';
+import { deviceStore } from '@/store/modules/use-device-store.ts';
 import { envStore } from '@/store/modules/use-env-store.ts';
 import { userStore } from '@/store/modules/use-user-store.ts';
 import type {
@@ -20,6 +21,7 @@ const request = axiosRequest({
     headers: {
       'Content-Type': 'application/json',
     },
+    timeout: 10000,
   },
   loadingMiddlewareConfig: {
     showLoading: () => {
@@ -48,9 +50,10 @@ const requestProcessMiddlewares: Middleware<
   config.baseURL = envStore.getState().getServerHost('default');
   const { accessToken } = userStore.getState().loginData;
   config.headers!.Authorization = `Bearer ${accessToken}`;
-  // add buildTime to url params
+  const appVersion = deviceStore.getState().getVersion();
   const commonParams = {
     buildTime: dayjs(BUILD_TIMESTAMP).format('YYYY-MM-DD HH:mm:ss'),
+    appVersion,
   };
   config.params = { ...commonParams, ...config.params };
   await next();
