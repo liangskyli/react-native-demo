@@ -1,5 +1,7 @@
 import Button from '@/components/button';
+import Checkbox from '@/components/checkbox';
 import Popup from '@/components/popup';
+import Radio from '@/components/radio';
 import SafeScreen from '@/components/safe-screen';
 import Toast from '@/components/toast';
 import { Paths } from '@/navigation/paths.ts';
@@ -12,6 +14,14 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
   const { navigation } = props;
   const { cleanLoginData } = useUserStore();
   const [popupVisible, setPopupVisible] = useState(false);
+  const [radioValue, setRadioValue] = useState('1');
+  const handleRadioChange = (value: string) => {
+    setRadioValue(value);
+    console.log('radio change:', value);
+  };
+  const handleSelectionChange = (selected: string[]) => {
+    console.log('当前选中:', selected);
+  };
 
   return (
     <SafeScreen
@@ -21,6 +31,23 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
       <Text>This is top text.</Text>
       <View className="items-center gap-1">
         <Text>my Screen</Text>
+        <Checkbox.Group
+          options={[
+            { label: '苹果', value: 'apple' },
+            { label: '香蕉', value: 'banana' },
+            { label: '橙子', value: 'orange' },
+          ]}
+          onChange={handleSelectionChange}
+        />
+        <Radio.Group
+          options={[
+            { label: '选项1', value: '1' },
+            { label: '选项2', value: '2' },
+            { label: '选项3', value: '3' },
+          ]}
+          initialValue={radioValue}
+          onChange={handleRadioChange}
+        />
         <Button
           title="VirtualList 列表分页滚动"
           onPress={() => {
