@@ -46,7 +46,6 @@ export const portalStore = createStore<PortalStoreStore>()(
           );
         } else {
           state.portalList = [];
-          state.key = InitKey;
         }
       });
     },
