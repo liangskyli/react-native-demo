@@ -3,6 +3,7 @@ import Checkbox from '@/components/checkbox';
 import Popup from '@/components/popup';
 import Radio from '@/components/radio';
 import SafeScreen from '@/components/safe-screen';
+import Switch from '@/components/switch';
 import Toast from '@/components/toast';
 import useMultipleTrigger from '@/hooks/use-multiple-trigger.tsx';
 import { Paths } from '@/navigation/paths.ts';
@@ -30,6 +31,7 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
     },
     { times: 6 },
   );
+  const [switch1, setSwitch1] = useState(false);
 
   return (
     <SafeScreen
@@ -39,6 +41,19 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
       <Text>This is top text.</Text>
       <View className="items-center gap-1">
         <Text>my Screen</Text>
+        <View className="flex-row items-center gap-2">
+          <Switch value={switch1} onChange={setSwitch1} />
+          <Switch value={true} disabled />
+          <Switch
+            value={switch1}
+            onChange={setSwitch1}
+            width={70}
+            height={40}
+            thumbSize={30}
+            checkedText="开"
+            uncheckedText="关"
+          />
+        </View>
         <Checkbox.Group
           options={[
             { label: '苹果', value: 'apple' },
