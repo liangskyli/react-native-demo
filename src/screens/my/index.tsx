@@ -43,7 +43,7 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
         <Text>my Screen</Text>
         <View className="flex-row items-center gap-2">
           <Switch value={switch1} onChange={setSwitch1} />
-          <Switch value={true} disabled />
+          <Switch value={true} />
           <Switch
             value={switch1}
             onChange={setSwitch1}
@@ -72,53 +72,69 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
           onChange={handleRadioChange}
         />
         <Button
-          title="VirtualList 列表分页滚动"
+          loading={true}
           onPress={() => {
             navigation.navigate(Paths.virtualList, { type: 'list1' });
           }}
-        />
+        >
+          loading
+        </Button>
         <Button
-          title="VirtualList 聊天消息滚动"
+          onPress={() => {
+            navigation.navigate(Paths.virtualList, { type: 'list1' });
+          }}
+        >
+          VirtualList 列表分页滚动
+        </Button>
+        <Button
           onPress={() => {
             navigation.navigate(Paths.virtualList, { type: 'list2' });
           }}
-        />
+        >
+          VirtualList 聊天消息滚动
+        </Button>
         <Button
-          title="popup"
           onPress={() => {
             setPopupVisible(true);
           }}
-        />
+        >
+          popup
+        </Button>
         <Button
-          title="连续点6次"
           onPress={() => {
             onClickPopUpEnv();
           }}
-        />
+        >
+          连续点6次
+        </Button>
         <Button
-          title="toast"
           onPress={() => {
             Toast.show('Toast 内容');
           }}
-        />
+        >
+          toast
+        </Button>
         <Button
-          title="Go to webView"
           onPress={() => {
             navigation.navigate(Paths.webView, { uri: 'https://qq.com' });
           }}
-        />
+        >
+          Go to webView
+        </Button>
         <Button
-          title="查看日志文件"
           onPress={() => {
             navigation.navigate(Paths.logViewer);
           }}
-        />
+        >
+          查看日志文件
+        </Button>
         <Button
-          title="Login out"
           onPress={() => {
             cleanLoginData();
           }}
-        />
+        >
+          Login out
+        </Button>
       </View>
       <Text>This is bottom text.</Text>
       <Popup
@@ -132,11 +148,12 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
         <View className="flex-1 items-center">
           <Text className="text-[16px]">内容</Text>
           <Button
-            title="关闭"
             onPress={() => {
               setPopupVisible(false);
             }}
-          />
+          >
+            关闭
+          </Button>
         </View>
       </Popup>
     </SafeScreen>

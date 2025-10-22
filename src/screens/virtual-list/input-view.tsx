@@ -28,11 +28,12 @@ const InputView = (props: InputViewProps) => {
       />
       <Button
         className="ml-4 h-[40px] w-[80px] items-center justify-center rounded-[8px]"
-        title="按钮"
         onPress={() => {
           inputRef.current?.blur();
         }}
-      />
+      >
+        按钮
+      </Button>
     </View>
   );
 };

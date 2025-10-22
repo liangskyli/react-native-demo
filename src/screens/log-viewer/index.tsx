@@ -154,18 +154,20 @@ const LogViewerScreen = () => {
           <Text className="text-xl font-bold">日志文件</Text>
           <View className="flex-row gap-2">
             <Button
-              title="刷新"
               onPress={loadLogFiles}
               className="h-[36px] px-3"
               textClassName="text-sm"
-            />
+            >
+              刷新
+            </Button>
             <Button
-              title="清除全部"
               onPress={clearAllLogs}
               className="h-[36px] bg-red-500 px-3"
               textClassName="text-sm"
               disabled={logFiles.length === 0}
-            />
+            >
+              清除全部
+            </Button>
           </View>
         </View>
 

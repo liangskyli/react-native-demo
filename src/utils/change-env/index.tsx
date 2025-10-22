@@ -24,11 +24,12 @@ export const popUpSetEnvEnum = () => {
         }}
       />
       <Button
-        title="关闭"
         onPress={() => {
           close();
         }}
-      />
+      >
+        关闭
+      </Button>
     </View>,
   );
 };

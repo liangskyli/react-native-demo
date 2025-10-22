@@ -19,19 +19,21 @@ const DetailScreen = (props: RootNativeStackScreenProps<Paths.detail>) => {
         <Text>Detail Screen:{route.params.id}</Text>
         <AssetsImage path="tom" className="h-[80] w-[100]" />
         <Button
-          title="Go back"
           onPress={() => {
             navigation.pop();
           }}
-        />
+        >
+          Go back
+        </Button>
         <Button
-          title="get axios data"
           onPress={async () => {
             await requestApi['/v1/building/get-list'].get({
               params: { activityId: 1 },
             });
           }}
-        />
+        >
+          get axios data
+        </Button>
       </View>
       <Text>This is bottom text.</Text>
     </SafeScreen>

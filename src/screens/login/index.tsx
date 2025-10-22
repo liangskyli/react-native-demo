@@ -164,11 +164,12 @@ const LoginScreen = () => {
 
           {/* 登录按钮 */}
           <Button
-            title="登录"
             onPress={handleLogin}
             className="mt-4 h-[48px]"
             disabled={!mobile || !password}
-          />
+          >
+            登录
+          </Button>
         </View>
       </KeyboardAwareView>
       <Text className="mb-6 text-sm text-gray-400">安全登录，保护隐私</Text>

@@ -13,11 +13,12 @@ const HomeScreen = (props: HomeTabScreenProps<Paths.home>) => {
       <View className="h-[80] items-center justify-center">
         <Text>Home Screen</Text>
         <Button
-          title="Go to Detail"
           onPress={() => {
             navigation.navigate(Paths.detail, { id: '1' });
           }}
-        />
+        >
+          Go to Detail
+        </Button>
       </View>
       <NewAppScreen />
     </SafeScreen>
