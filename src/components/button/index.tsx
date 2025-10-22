@@ -8,7 +8,7 @@ import LoadingIcon from '../loading/loading-icon.tsx';
 export type ButtonProps = TouchableHighlightProps & {
   /** 按钮类名 */
   className?: string;
-  /** 按钮文本类名,使用title时有效 */
+  /** 按钮文本类名 */
   textClassName?: string;
   /** 按钮文本 */
   children?: ReactNode;
