@@ -39,7 +39,7 @@ export const envStore = createStore<EnvStore>()(
       const defaultEnv: EnvEnumType | undefined =
         updateEnvEnum(BUILD_envEnumType);
       set(state => {
-        state.envEnumType = state.envEnumType ?? defaultEnv;
+        state.envEnumType = defaultEnv;
       });
     },
     updateEnvEnumType: envEnum =>
