@@ -42,9 +42,9 @@ const Checkbox = <T extends string | number = string>(
     className,
     boxClassName,
     labelClassName,
-    checkedIcon = <Icon path="check" width={14} height={14} color={'#fff'} />,
+    checkedIcon = <Icon path="check" className="size-[14px] text-white" />,
     indeterminateIcon = (
-      <Icon path="indeterminate" width={14} height={14} color={'#fff'} />
+      <Icon path="indeterminate" className="size-[14px] text-white" />
     ),
   } = props;
   return (

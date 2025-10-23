@@ -13,6 +13,8 @@ import type { SvgProps } from 'react-native-svg';
 type LoadingIconProps = {
   /** 是否显示动画 */
   visibleAnimated: boolean;
+  /** icon自定义样式 */
+  className?: string;
 } & Pick<SvgProps, 'width' | 'height' | 'color'>;
 const LoadingIcon = (props: LoadingIconProps) => {
   const { visibleAnimated, ...svgProps } = props;

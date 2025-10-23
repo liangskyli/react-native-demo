@@ -43,7 +43,7 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
         <Text>my Screen</Text>
         <View className="flex-row items-center gap-2">
           <Switch value={switch1} onChange={setSwitch1} />
-          <Switch value={true} />
+          <Switch value={true} disabled />
           <Switch
             value={switch1}
             onChange={setSwitch1}

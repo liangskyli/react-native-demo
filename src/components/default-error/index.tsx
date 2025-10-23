@@ -11,7 +11,7 @@ function DefaultError({ onReset = undefined }: Properties) {
 
   return (
     <View className="flex-1 items-center justify-center gap-[16] p-[16]">
-      <Icon path="404" width={300} height={242} />
+      <Icon path="404" className="h-[242px] w-[300px]" />
       <Text className="text-[16px] font-bold text-gray-700">
         糟糕！出问题了。
       </Text>

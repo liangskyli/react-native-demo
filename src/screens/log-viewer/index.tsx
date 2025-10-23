@@ -214,9 +214,7 @@ const LogViewerScreen = () => {
               <View className="flex-1 items-center justify-center">
                 <LoadingIcon
                   visibleAnimated={true}
-                  width={40}
-                  height={40}
-                  color="#3b82f6"
+                  className="size-10 text-blue-500"
                 />
               </View>
             ) : logLines.length === 0 ? (

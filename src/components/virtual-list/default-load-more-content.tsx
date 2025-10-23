@@ -28,7 +28,7 @@ const DefaultLoadMoreContent = (props: LoadMoreContentProps) => {
           </Pressable>
         </View>
       ) : (
-        <LoadingIcon visibleAnimated width={20} height={20} />
+        <LoadingIcon visibleAnimated className="size-5 text-gray-500" />
       )}
     </View>
   );

@@ -148,9 +148,7 @@ const LoginScreen = () => {
               >
                 <Icon
                   path={showPassword ? 'eye' : 'eye-off'}
-                  width={20}
-                  height={20}
-                  color="#666"
+                  className="size-5 text-[#666]"
                 />
               </TouchableOpacity>
             </View>

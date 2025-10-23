@@ -1,4 +1,5 @@
 import getIconsContext from '@/assets/icons-loader.ts';
+import { cssInterop } from 'nativewind';
 import type { FC, ReactElement } from 'react';
 import { useMemo } from 'react';
 import type { SvgProps } from 'react-native-svg';
@@ -25,8 +26,16 @@ function Icon({ height = SIZE, path, width = SIZE, ...props }: Properties) {
             ),
           })
           .parse(icons(`./${path}.${EXTENSION}`)).default;
-
-      return getDefaultSource();
+      const BaseSvgIcon = getDefaultSource();
+      return cssInterop(BaseSvgIcon, {
+        className: {
+          target: 'style',
+          nativeStyleToProp: {
+            height: true,
+            width: true,
+          },
+        },
+      });
     } catch (error) {
       console.error(`Couldn't load the icon: ${path}.${EXTENSION}`, error);
       throw error;

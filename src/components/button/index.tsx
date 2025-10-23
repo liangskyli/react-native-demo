@@ -1,7 +1,7 @@
 import { cn } from '@/styles/tool.ts';
 import type { ReactNode } from 'react';
 import React from 'react';
-import type { ColorValue, TouchableHighlightProps } from 'react-native';
+import type { TouchableHighlightProps } from 'react-native';
 import { Text, TouchableHighlight, View } from 'react-native';
 import LoadingIcon from '../loading/loading-icon.tsx';
 
@@ -14,10 +14,8 @@ export type ButtonProps = TouchableHighlightProps & {
   children?: ReactNode;
   /** 加载状态 */
   loading?: boolean;
-  /** 加载图标颜色 */
-  loadingColor?: ColorValue;
-  /** 加载图标大小 */
-  loadingSize?: number;
+  /** 加载图标类名 */
+  loadingClassName?: string;
 };
 const Button = (props: ButtonProps) => {
   const {
@@ -27,8 +25,7 @@ const Button = (props: ButtonProps) => {
     children,
     disabled,
     loading,
-    loadingColor = '#fff',
-    loadingSize = 16,
+    loadingClassName,
     ...buttonProps
   } = props;
   const isDisabled = disabled || loading;
@@ -51,9 +48,7 @@ const Button = (props: ButtonProps) => {
             <View className="mr-1.5 justify-center align-middle">
               <LoadingIcon
                 visibleAnimated
-                width={loadingSize}
-                height={loadingSize}
-                color={loadingColor}
+                className={cn('size-4 text-white', loadingClassName)}
               />
             </View>
             <Text className={cn('text-sm text-white', textClassName)}>

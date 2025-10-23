@@ -23,12 +23,7 @@ const Loading = (props: Props) => {
           bodyClassName,
         )}
       >
-        <LoadingIcon
-          visibleAnimated={visible}
-          width={40}
-          height={40}
-          color="#fff"
-        />
+        <LoadingIcon visibleAnimated={visible} className="size-10 text-white" />
         <Text className={cn('mt-[4px] text-[14px] text-white', textClassName)}>
           加载中...
         </Text>

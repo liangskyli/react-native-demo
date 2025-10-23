@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import React, { useRef, useState } from 'react';
 import type { ColorValue } from 'react-native';
 import { Animated, Text, TouchableOpacity, View } from 'react-native';
+import colors from 'tailwindcss/colors';
 import LoadingIcon from '../loading/loading-icon.tsx';
 
 type SwitchProps = {
@@ -40,7 +41,7 @@ const Switch = (props: SwitchProps) => {
     onChange,
     disabled = false,
     trackColor,
-    thumbColor = '#fff',
+    thumbColor = colors.white,
     width = 54,
     height = 30,
     thumbSize = 24,
@@ -50,10 +51,11 @@ const Switch = (props: SwitchProps) => {
     loading,
     className,
   } = props;
+  console.log('ddd:', width, height, thumbSize);
   const isDisabled = disabled || loading;
   const defaultTrackColor: SwitchProps['trackColor'] = {
-    off: '#ddd',
-    on: '#2563eb',
+    off: colors.gray['300'],
+    on: colors.blue['600'],
   };
   const [isOn, setIsOn] = useState(value);
   const padding = (height - thumbSize) / 2;
