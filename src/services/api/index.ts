@@ -1,5 +1,5 @@
-import type { IBaseJsonData } from '@/services/request/base.ts';
-import request from '@/services/request/base.ts';
+import type { IBaseJsonData } from '@/services/gen-example';
+import request from '@/services/gen-example';
 
 const createApi = request.createApi();
 const requestApi = {

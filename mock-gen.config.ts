@@ -6,7 +6,7 @@ export default defineConfig([
     openapiPath: new URL('./openapi/openapiv3-example.json', import.meta.url),
     genTsDir: './src/services/gen-example',
     requestFile: {
-      path: '../../request/base.ts',
+      path: '../../gen-example/index.ts',
       requestParamsType: 'IRequestConfig',
     },
     jsonSchemaFakerOptions: {
