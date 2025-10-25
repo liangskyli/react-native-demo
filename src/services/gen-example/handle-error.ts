@@ -3,9 +3,11 @@ import type {
   ShowErrorConfig,
 } from '@liangskyli/axios-request';
 
-const handleError: ShowErrorConfig['handleError'] = (
-  err: SerializedError<'retCode', 'retMsg'>,
-) => {
+const handleError: ShowErrorConfig<
+  any,
+  any,
+  SerializedError<'retCode', 'retMsg', number>
+>['handleError'] = err => {
   switch (err.retCode) {
     default:
       break;

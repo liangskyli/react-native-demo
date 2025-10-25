@@ -5,7 +5,9 @@ import type {
   Middleware,
 } from '@liangskyli/axios-request';
 
-type IAxiosRequestOpts = Parameters<typeof axiosRequest>[0];
+type IAxiosRequestOpts = Parameters<
+  typeof axiosRequest<Record<string, any>, any, any, any>
+>[0];
 const initAxiosRequestOpts: Omit<
   IAxiosRequestOpts,
   'ShowErrorMiddlewareConfig'

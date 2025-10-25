@@ -12,7 +12,6 @@ import type {
   Context,
   IRequestConfig,
   Middleware,
-  SerializedError,
 } from '@liangskyli/axios-request';
 import { axiosRequest } from '@liangskyli/axios-request';
 import dayjs from 'dayjs';
@@ -22,7 +21,13 @@ export type IBaseJsonData<T = unknown> = {
   retMsg?: string;
   data: T;
 };
-const request = axiosRequest({
+const request = axiosRequest<
+  IBaseJsonData,
+  'retCode',
+  'retMsg',
+  'data',
+  number
+>({
   ...initAxiosRequestOpts,
   serializedResponseMiddlewareConfig: {
     serializedResponseCodeKey: 'retCode',
@@ -33,7 +38,7 @@ const request = axiosRequest({
     handleError: (err, ctx) => {
       return handleError?.(err, ctx);
     },
-    showError: (err: SerializedError<'retCode', 'retMsg'>, ctx) => {
+    showError: (err, ctx) => {
       console.error('showError:', err, ctx);
       Toast.show(err.retMsg);
     },
@@ -41,7 +46,10 @@ const request = axiosRequest({
 });
 
 const requestProcessMiddlewares: Middleware<
-  Context<IRequestConfig, IBaseJsonData>
+  Context<
+    IRequestConfig<IBaseJsonData, 'retCode', 'retMsg', number>,
+    IBaseJsonData
+  >
 > = async (ctx, next) => {
   const { config } = ctx;
   config.baseURL = envStore.getState().getServerHost('default');
