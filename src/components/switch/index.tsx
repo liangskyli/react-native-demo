@@ -51,7 +51,7 @@ const Switch = (props: SwitchProps) => {
     loading,
     className,
   } = props;
-  console.log('ddd:', width, height, thumbSize);
+
   const isDisabled = disabled || loading;
   const defaultTrackColor: SwitchProps['trackColor'] = {
     off: colors.gray['300'],

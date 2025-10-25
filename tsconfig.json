@@ -16,6 +16,7 @@
     "mock/**/*"
   ],
   "exclude": [
+    "**/node_modules",
     "**/Pods/**"
-  ]
+  ],
 }
