@@ -10,7 +10,8 @@ import { Paths } from '@/navigation/paths.ts';
 import type { HomeTabScreenProps } from '@/navigation/types.ts';
 import { useUserStore } from '@/store/modules/use-user-store.ts';
 import { popUpSetEnvEnum } from '@/utils/change-env';
-import { useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback, useState } from 'react';
 import { Text, View } from 'react-native';
 
 const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
@@ -32,6 +33,17 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
     { times: 6 },
   );
   const [switch1, setSwitch1] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      // Do something when the screen is focused
+      console.log('focus load data');
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, []),
+  );
 
   return (
     <SafeScreen

@@ -8,6 +8,7 @@ import MyScreen from '@/screens/my';
 import type { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import type { ComponentType } from 'react';
+import { View } from 'react-native';
 
 const BottomTab = createBottomTabNavigator<HomeTabParamList>();
 
@@ -19,6 +20,17 @@ const tabbarList: ScreenRouteConfig<
     name: Paths.home,
     options: { headerShown: true, title: '首页' },
     component: HomeScreen as ComponentType,
+  },
+  {
+    name: 'center' as any,
+    options: {
+      headerShown: true,
+      title: '中间',
+      tabBarIcon: () => (
+        <View className="position-absolute -top-[20px] size-[60px] rounded-full bg-red-600" />
+      ),
+    },
+    component: MyScreen as ComponentType,
   },
   {
     name: Paths.my,
