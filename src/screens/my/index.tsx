@@ -116,10 +116,23 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
         </Button>
         <Button
           onPress={() => {
-            navigation.navigate(Paths.webView, { uri: 'https://qq.com' });
+            navigation.navigate(Paths.webView, {
+              source: { uri: 'https://qq.com' },
+              isMutiPage: true,
+            });
           }}
         >
           Go to webView
+        </Button>
+        <Button
+          onPress={() => {
+            navigation.navigate(Paths.webView, {
+              originWhitelist: ['*'],
+              source: { html: '<h1>Hello world</h1>' },
+            });
+          }}
+        >
+          Go to webView html
         </Button>
         <Button
           onPress={() => {
