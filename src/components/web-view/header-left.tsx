@@ -1,15 +1,16 @@
 import AssetsImage from '@/components/assets-image';
 import Icon from '@/components/icon';
-import type { Paths } from '@/navigation/paths.ts';
 import type { RootNativeStackScreenProps } from '@/navigation/types.ts';
 import type { NativeStackHeaderLeftProps } from '@react-navigation/native-stack';
 import type { RefObject } from 'react';
 import { TouchableOpacity } from 'react-native';
 import type WebView from 'react-native-webview';
 
-type HeaderLeftProps = NativeStackHeaderLeftProps & {
-  webViewRef: RefObject<WebView>;
-  navigation: RootNativeStackScreenProps<Paths.webView>['navigation'];
+export type HeaderLeftProps = NativeStackHeaderLeftProps & {
+  /** webview ref */
+  webViewRef: RefObject<WebView | null>;
+  /** 导航 */
+  navigation: RootNativeStackScreenProps<any>['navigation'];
 };
 const HeaderLeft = (props: HeaderLeftProps) => {
   const { canGoBack, webViewRef, navigation } = props;

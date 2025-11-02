@@ -129,6 +129,7 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
             navigation.navigate(Paths.webView, {
               originWhitelist: ['*'],
               source: { html: '<h1>Hello world</h1>' },
+              title: 'Hello world',
             });
           }}
         >

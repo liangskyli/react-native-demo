@@ -1,3 +1,4 @@
+import type { WebViewProps } from '@/components/web-view';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import type {
   CompositeScreenProps,
@@ -14,7 +15,6 @@ import type {
 } from '@react-navigation/native-stack';
 import type { NavigationState, ParamListBase } from '@react-navigation/routers';
 import type { ComponentType } from 'react';
-import type { WebViewProps } from 'react-native-webview';
 import type { Paths } from './paths';
 
 export type HomeTabParamList = {
@@ -26,10 +26,7 @@ export type RootNativeStackParamList = {
   [Paths.login]: undefined;
   [Paths.homeTabBar]?: NavigatorScreenParams<HomeTabParamList>;
   [Paths.detail]: { id: string };
-  [Paths.webView]: WebViewProps & {
-    /** 是否多页模式 */
-    isMutiPage?: boolean;
-  };
+  [Paths.webView]: Omit<WebViewProps, 'navigation'>;
   [Paths.virtualList]: { type: 'list1' | 'list2' };
   [Paths.logViewer]: undefined;
 };
