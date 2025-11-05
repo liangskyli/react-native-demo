@@ -64,12 +64,22 @@ const Popup = (props: PopupProps) => {
 
   const mergedEdges = edges ? edges : defaultEdges[position];
   const mergedEdgesStyles = useMemo(() => {
-    return {
-      paddingTop: mergedEdges.includes('top') ? insets.top : undefined,
-      paddingBottom: mergedEdges.includes('bottom') ? insets.bottom : undefined,
-      paddingLeft: mergedEdges.includes('left') ? insets.left : undefined,
-      paddingRight: mergedEdges.includes('right') ? insets.right : undefined,
-    };
+    const styles: Record<string, number> = {};
+
+    if (mergedEdges.includes('top')) {
+      styles.paddingTop = insets.top;
+    }
+    if (mergedEdges.includes('bottom')) {
+      styles.paddingBottom = insets.bottom;
+    }
+    if (mergedEdges.includes('left')) {
+      styles.paddingLeft = insets.left;
+    }
+    if (mergedEdges.includes('right')) {
+      styles.paddingRight = insets.right;
+    }
+
+    return styles;
   }, [insets.bottom, insets.left, insets.right, insets.top, mergedEdges]);
   return (
     <Mask
