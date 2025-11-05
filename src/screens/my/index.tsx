@@ -8,10 +8,11 @@ import Toast from '@/components/toast';
 import useMultipleTrigger from '@/hooks/use-multiple-trigger.tsx';
 import { Paths } from '@/navigation/paths.ts';
 import type { HomeTabScreenProps } from '@/navigation/types.ts';
+import { ajaxLoadingStore } from '@/store';
 import { useUserStore } from '@/store/modules/use-user-store.ts';
 import { popUpSetEnvEnum } from '@/utils/change-env';
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 
 const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
   const { navigation } = props;
@@ -32,6 +33,38 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
     { times: 6 },
   );
   const [switch1, setSwitch1] = useState(false);
+  const popUpShow = () => {
+    const { close } = Popup.show(
+      <View className="flex-1 items-center">
+        <Text className="text-[16px]">内容</Text>
+        <Button
+          onPress={() => {
+            Toast.show('Toast 内容2');
+          }}
+        >
+          toast
+        </Button>
+        <Button
+          onPress={() => {
+            ajaxLoadingStore.getState().showLoading();
+            setTimeout(() => {
+              ajaxLoadingStore.getState().hideLoading();
+            }, 3000);
+          }}
+        >
+          loading
+        </Button>
+        <Button
+          onPress={() => {
+            close();
+          }}
+        >
+          关闭
+        </Button>
+      </View>,
+      { bodyClassName: 'p-0' },
+    );
+  };
 
   return (
     <SafeScreen
@@ -98,7 +131,14 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
             setPopupVisible(true);
           }}
         >
-          popup
+          popup1
+        </Button>
+        <Button
+          onPress={() => {
+            popUpShow();
+          }}
+        >
+          popup2
         </Button>
         <Button
           onPress={() => {
@@ -154,20 +194,50 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
       <Popup
         visible={popupVisible}
         maskClosable={true}
-        maskProps={{ modalProps: { animationType: 'none' } }}
         onClose={() => setPopupVisible(false)}
-        bodyClassName="p-10"
-        position="center"
+        bodyClassName="p-0"
+        position="bottom"
+        /*edges={[]}*/
       >
         <View className="flex-1 items-center">
-          <Text className="text-[16px]">内容</Text>
-          <Button
-            onPress={() => {
-              setPopupVisible(false);
-            }}
-          >
-            关闭
-          </Button>
+          <ScrollView className="h-[200px]">
+            <Text className="text-[16px]">内容</Text>
+            <Text className="text-[16px]">内容</Text>
+            <Text className="text-[16px]">内容</Text>
+            <Text className="text-[16px]">内容</Text>
+            <Text className="text-[16px]">内容</Text>
+            <Button
+              onPress={() => {
+                Toast.show('Toast 内容2内容2内容2内容2');
+              }}
+            >
+              toast
+            </Button>
+            <Button
+              onPress={() => {
+                ajaxLoadingStore.getState().showLoading();
+                setTimeout(() => {
+                  ajaxLoadingStore.getState().hideLoading();
+                }, 3000);
+              }}
+            >
+              loading
+            </Button>
+            <Button
+              onPress={() => {
+                popUpShow();
+              }}
+            >
+              popup2
+            </Button>
+            <Button
+              onPress={() => {
+                setPopupVisible(false);
+              }}
+            >
+              关闭
+            </Button>
+          </ScrollView>
         </View>
       </Popup>
     </SafeScreen>

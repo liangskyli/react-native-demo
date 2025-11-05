@@ -30,7 +30,7 @@ export const PopupHost = (props: PopupHostProps) => {
           maskProps?.className,
           classConfig.maskClickableConfig({ maskClickable }),
         ),
-        isUseModal: !maskClickable,
+        renderMode: 'view',
       }}
     >
       {content}
@@ -53,7 +53,7 @@ const show: (
   content: ReactNode,
   config?: Partial<PopupConfigProps>,
 ) => CloseHandler = (content, config) => {
-  const mergedConfig = merge(currentConfig, config);
+  const mergedConfig = merge({}, currentConfig, config);
   const { add, remove } = portalStore.getState();
 
   const key = add(

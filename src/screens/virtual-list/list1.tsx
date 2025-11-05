@@ -1,6 +1,7 @@
 import VirtualList from '@/components/virtual-list';
 import { useState } from 'react';
 import { Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type ListItem = {
   id: string;
@@ -28,6 +29,7 @@ function generateMessages(startId: number, count: number): ListItem[] {
 }
 
 export default function List1() {
+  const insets = useSafeAreaInsets();
   // 初始化数据：从 ID 100 开始，生成 20 条消息
   const [messages, setMessages] = useState<ListItem[]>(() =>
     generateMessages(100, 20),
@@ -101,6 +103,7 @@ export default function List1() {
         // 底部加载更多
         loadMoreBottom={handleLoadMore}
         hasMoreBottom={hasMore}
+        ListFooterComponent={<View style={{ paddingBottom: insets.bottom }} />}
       />
     </>
   );

@@ -9,7 +9,10 @@ const VirtualList = (props: RootNativeStackScreenProps<Paths.virtualList>) => {
   const { route } = props;
   const type = route.params.type;
   return (
-    <SafeScreen className="flex-1" edges={['left', 'right', 'bottom']}>
+    <SafeScreen
+      className="flex-1"
+      edges={type === 'list1' ? ['left', 'right'] : ['left', 'right', 'bottom']}
+    >
       {/* 标题栏 */}
       <View className="items-center bg-blue-500 p-3">
         <Text className="text-lg font-bold color-white">VirtualList 演示</Text>

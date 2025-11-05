@@ -47,7 +47,7 @@ export const ToastHost = (props: ToastHostProps) => {
       {...popupProps}
       maskProps={{
         className: classConfig.maskPropsConfig({ maskClickable }),
-        isUseModal: !maskClickable,
+        renderMode: 'view',
       }}
       bodyClassName={cn(classConfig.bodyConfig({ position }), bodyClassName)}
     >
@@ -77,7 +77,7 @@ const show: (
   content: string,
   config?: Partial<ToastConfigProps>,
 ) => Promise<CloseHandler> = async (content, config) => {
-  const mergedConfig = merge(currentConfig, config);
+  const mergedConfig = merge({}, currentConfig, config);
   const { duration, afterClose, position, maskClickable } = mergedConfig;
   const { add, remove, clear } = portalStore.getState();
 
@@ -114,7 +114,7 @@ const config = (conf: ToastConfigProps) => {
 const getConfig = () => ({ ...currentConfig }) as ToastConfigProps;
 
 const clear = () => {
-  const { clear } = portalStore.getState();
-  clear('toast');
+  const { clear: storeClear } = portalStore.getState();
+  storeClear('toast');
 };
 export { clear, config, getConfig, show };

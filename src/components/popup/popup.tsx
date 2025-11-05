@@ -4,7 +4,9 @@ import classConfig from '@/components/popup/class-config.ts';
 import SafeScreen from '@/components/safe-screen';
 import { cn } from '@/styles/tool.ts';
 import type { ReactNode } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import type { Edge } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export type Position = 'bottom' | 'top' | 'left' | 'right' | 'center' | 'none';
 export type PopupProps = {
@@ -24,8 +26,18 @@ export type PopupProps = {
   duration?: number;
   /** 蒙层属性 */
   maskProps?: Omit<MaskProps, 'visible' | 'children' | 'onMaskPress'>;
+  /** SafeScreen属性，默认没设置 */
+  edges?: Edge[];
 };
 
+const defaultEdges: Record<Position, Edge[]> = {
+  top: ['top'],
+  bottom: ['bottom'],
+  left: ['top', 'bottom'],
+  right: ['top', 'bottom'],
+  center: [],
+  none: [],
+};
 const Popup = (props: PopupProps) => {
   const {
     visible,
@@ -36,7 +48,9 @@ const Popup = (props: PopupProps) => {
     bodyClassName,
     duration = 0,
     maskProps,
+    edges,
   } = props;
+  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     let timer: number | undefined;
@@ -48,6 +62,15 @@ const Popup = (props: PopupProps) => {
     return () => clearTimeout(timer);
   }, [visible, duration, onClose]);
 
+  const mergedEdges = edges ? edges : defaultEdges[position];
+  const mergedEdgesStyles = useMemo(() => {
+    return {
+      paddingTop: mergedEdges.includes('top') ? insets.top : undefined,
+      paddingBottom: mergedEdges.includes('bottom') ? insets.bottom : undefined,
+      paddingLeft: mergedEdges.includes('left') ? insets.left : undefined,
+      paddingRight: mergedEdges.includes('right') ? insets.right : undefined,
+    };
+  }, [insets.bottom, insets.left, insets.right, insets.top, mergedEdges]);
   return (
     <Mask
       {...maskProps}
@@ -56,6 +79,8 @@ const Popup = (props: PopupProps) => {
     >
       <SafeScreen
         className={cn(classConfig.bodyConfig({ position }), bodyClassName)}
+        edges={[]}
+        style={mergedEdgesStyles}
       >
         {children}
       </SafeScreen>

@@ -6,20 +6,21 @@ import { StatusBar } from 'react-native';
 import type { SafeAreaViewProps } from 'react-native-safe-area-context';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-type Properties = PropsWithChildren<
+export type SafeScreenProps = PropsWithChildren<
   {
     readonly isError?: boolean;
     readonly onResetError?: () => void;
-  } & Omit<SafeAreaViewProps, 'mode'>
+  } & SafeAreaViewProps
 >;
-function SafeScreen({
-  children = undefined,
-  isError = false,
-  onResetError = undefined,
-  ...props
-}: Properties) {
+function SafeScreen(props: SafeScreenProps) {
+  const {
+    children = undefined,
+    isError = false,
+    onResetError = undefined,
+    ...safeAreaViewProps
+  } = props;
   return (
-    <SafeAreaView {...props} mode="padding">
+    <SafeAreaView {...safeAreaViewProps}>
       <StatusBar
         barStyle="dark-content"
         translucent={true}

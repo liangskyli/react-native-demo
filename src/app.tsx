@@ -38,16 +38,16 @@ function App() {
 
   return (
     <StrictMode>
-      <Portal>
-        <GestureHandlerRootView>
-          <KeyboardProvider>
-            <SafeAreaProvider>
+      <SafeAreaProvider>
+        <Portal>
+          <GestureHandlerRootView>
+            <KeyboardProvider>
               <Loading visible={isLoading} />
               {isLaunched ? <ApplicationNavigator /> : <View />}
-            </SafeAreaProvider>
-          </KeyboardProvider>
-        </GestureHandlerRootView>
-      </Portal>
+            </KeyboardProvider>
+          </GestureHandlerRootView>
+        </Portal>
+      </SafeAreaProvider>
     </StrictMode>
   );
 }

@@ -99,16 +99,21 @@ const VirtualList = <T = any,>(props: VirtualListProps<T>) => {
   };
 
   const innerListFooterComponent = () => {
-    return (
-      <>
-        {ListFooterComponent}
-        {loadingBottomRef.current &&
-          loadMoreContent({
+    if (loadingBottomRef.current) {
+      return (
+        <>
+          {loadMoreContent({
             failed: failed,
             retry: () => doLoadMore(true),
           })}
-      </>
-    );
+        </>
+      );
+    }
+    if (ListFooterComponent && typeof ListFooterComponent === 'function') {
+      return <ListFooterComponent />;
+    }
+
+    return <>{ListFooterComponent}</>;
   };
 
   return (

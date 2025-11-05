@@ -1,8 +1,9 @@
+import { portalStore } from '@/components/portal/use-portal-store.ts';
 import { cn } from '@/styles/tool.ts';
 import type { ReactNode } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ModalProps, TouchableWithoutFeedbackProps } from 'react-native';
-import { Modal, Pressable } from 'react-native';
+import { Modal, Pressable, View } from 'react-native';
 
 type BaseMaskProps = {
   /** 遮罩层自定义类名 */
@@ -11,16 +12,19 @@ type BaseMaskProps = {
   children?: ReactNode;
   /** 点击蒙层自身时触发 */
   onMaskPress?: TouchableWithoutFeedbackProps['onPress'];
-  /** 是否在关闭时销毁内容 */
+  /** 是否在关闭时销毁内容,renderMode不是portal有效 */
   destroyOnClose?: boolean;
   /** 是否显示 */
   visible?: boolean;
-  /** 是否用原生Modal的弹窗,默认true, false时，要确保放在根元素最后，才能确保全屏显示*/
-  isUseModal?: boolean;
+  /** 渲染模式:
+   * 'portal' - 渲染到Portal容器中
+   * 'view' - 直接渲染
+   * 'modal' - 原生渲染*/
+  renderMode?: 'portal' | 'view' | 'modal';
 };
 type MaskModalProps = Omit<ModalProps, 'children' | 'visible'>;
 export type MaskProps = BaseMaskProps & {
-  /** isUseModal为true时有效,原生Modal的弹窗属性 */
+  /** renderMode为modal时有效,原生Modal的弹窗属性 */
   modalProps?: MaskModalProps;
 };
 const Mask = (props: MaskProps) => {
@@ -30,11 +34,12 @@ const Mask = (props: MaskProps) => {
     children,
     onMaskPress,
     destroyOnClose,
-    isUseModal = true,
+    renderMode = 'portal',
     modalProps,
   } = props;
   const [isVisible, setIsVisible] = useState(false);
   const timeout = useRef<number>(null);
+  const portalKeyRef = useRef<number>(null);
 
   useEffect(() => {
     if (visible) {
@@ -53,30 +58,64 @@ const Mask = (props: MaskProps) => {
     };
   }, [visible]);
 
+  const baseMask = useMemo(
+    () => (
+      <>
+        <Pressable
+          className={cn(
+            'absolute inset-0 bg-black/70',
+            isVisible ? '' : 'hidden',
+            className,
+          )}
+          onPress={event => {
+            if (event.target === event.currentTarget) {
+              onMaskPress?.(event);
+            }
+          }}
+        />
+        <View className="absolute inset-0">{children}</View>
+      </>
+    ),
+    [className, isVisible, onMaskPress, children],
+  );
+
+  // Portal 模式：动态添加/移除元素
+  useEffect(() => {
+    if (renderMode === 'portal') {
+      const { add, remove } = portalStore.getState();
+
+      if (visible) {
+        // 添加到 Portal
+        portalKeyRef.current = add(baseMask, 'mask');
+      } else if (portalKeyRef.current !== null) {
+        // 从 Portal 移除
+        remove(portalKeyRef.current);
+        portalKeyRef.current = null;
+      }
+
+      return () => {
+        // 组件卸载时清理
+        if (portalKeyRef.current !== null) {
+          remove(portalKeyRef.current);
+          portalKeyRef.current = null;
+        }
+      };
+    }
+  }, [baseMask, renderMode, visible]);
+
+  // Portal 模式不渲染任何内容
+  if (renderMode === 'portal') {
+    return null;
+  }
+
+  // 非Portal 模式：直接渲染
   if (!visible && destroyOnClose) {
     return null;
   }
 
-  const baseMask = (
-    <Pressable
-      className={cn(
-        'absolute inset-0 bg-black/70',
-        isVisible ? '' : 'hidden',
-        className,
-      )}
-      onPress={event => {
-        if (event.target === event.currentTarget) {
-          onMaskPress?.(event);
-        }
-      }}
-    >
-      {children}
-    </Pressable>
-  );
-
   return (
     <>
-      {isUseModal ? (
+      {renderMode === 'modal' ? (
         <Modal
           statusBarTranslucent
           transparent
