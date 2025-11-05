@@ -4,13 +4,13 @@ const defaultConfig = {
   group: 'flex-row gap-2',
   radio: {
     radioBox: {
-      base: 'w-5 h-5 rounded-full border bg-white mr-2 justify-center items-center',
+      base: 'size-5 rounded-full border bg-white mr-2 justify-center items-center',
       checked: {
         false: 'border-gray-300',
         true: 'border-blue-600',
       },
     },
-    radioDot: 'h-3 w-3 rounded-full bg-blue-600',
+    radioDot: 'size-3 rounded-full bg-blue-600',
   },
 };
 

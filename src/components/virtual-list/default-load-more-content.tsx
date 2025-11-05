@@ -12,14 +12,14 @@ const DefaultLoadMoreContent = (props: LoadMoreContentProps) => {
   const { failed, retry } = props;
   if (props.hasMore === false) {
     return (
-      <View className="h-[40px] items-center justify-center">
+      <View className="h-10 items-center justify-center">
         <Text className="text-sm text-gray-500">没有更多数据了</Text>
       </View>
     );
   }
 
   return (
-    <View className="h-[40px] items-center justify-center">
+    <View className="h-10 items-center justify-center">
       {failed ? (
         <View className="flex-row">
           <Text>加载失败</Text>

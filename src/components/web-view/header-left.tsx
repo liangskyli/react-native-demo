@@ -17,7 +17,7 @@ const HeaderLeft = (props: HeaderLeftProps) => {
   return (
     <>
       <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Icon path="close" className="-ml-2 size-[28px] color-[#007AFF]" />
+        <Icon path="close" className="-ml-2 size-7 color-[#007AFF]" />
       </TouchableOpacity>
       {canGoBack && (
         <TouchableOpacity
@@ -25,7 +25,7 @@ const HeaderLeft = (props: HeaderLeftProps) => {
             webViewRef.current!.goBack();
           }}
         >
-          <AssetsImage path="back-icon" className="h-[21px] w-[12px]" />
+          <AssetsImage path="back-icon" className="size-[21px]" />
         </TouchableOpacity>
       )}
     </>

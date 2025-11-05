@@ -10,13 +10,13 @@ const defaultConfig = {
       },
     },
     box: {
-      base: 'w-5 h-5 rounded border bg-white mr-2 justify-center items-center',
+      base: 'size-5 rounded border bg-white mr-2 justify-center items-center',
       checked: {
         false: 'border-gray-300',
         true: 'border-blue-600 bg-blue-600',
       },
     },
-    icon: 'h-2.5 w-2.5',
+    icon: 'size-2.5',
     label: 'text-sm text-gray-700',
   },
 };

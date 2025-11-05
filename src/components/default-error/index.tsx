@@ -10,12 +10,12 @@ function DefaultError({ onReset = undefined }: Properties) {
   const { resetBoundary } = useErrorBoundary();
 
   return (
-    <View className="flex-1 items-center justify-center gap-[16] p-[16]">
+    <View className="flex-1 items-center justify-center gap-[16] p-4">
       <Icon path="404" className="h-[242px] w-[300px]" />
       <Text className="text-[16px] font-bold text-gray-700">
         糟糕！出问题了。
       </Text>
-      <Text className="text-center text-[12px] text-gray-700">
+      <Text className="text-center text-xs text-gray-700">
         很抱歉给您带来不便。请稍后再试。
       </Text>
 

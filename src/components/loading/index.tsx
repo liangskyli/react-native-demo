@@ -19,12 +19,12 @@ const Loading = (props: Props) => {
     <Popup visible={visible} maskProps={{ className: 'bg-black/0' }}>
       <View
         className={cn(
-          'h-[96px] w-[96px] items-center justify-center bg-black/70',
+          'size-[96px] items-center justify-center bg-black/70',
           bodyClassName,
         )}
       >
         <LoadingIcon visibleAnimated={visible} className="size-10 text-white" />
-        <Text className={cn('mt-[4px] text-[14px] text-white', textClassName)}>
+        <Text className={cn('mt-1 text-sm text-white', textClassName)}>
           加载中...
         </Text>
       </View>

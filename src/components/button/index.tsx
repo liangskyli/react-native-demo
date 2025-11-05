@@ -40,7 +40,7 @@ const BaseButton = (props: BaseButtonProps) => {
       {...buttonProps}
       disabled={isDisabled}
       className={cn(
-        'items-center justify-center rounded-[4px]',
+        'items-center justify-center rounded',
         'bg-blue-600 disabled:bg-blue-400',
         'px-4 py-2',
         className,

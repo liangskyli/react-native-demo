@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { createStore, useStore } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
-type PortalType = 'toast' | 'popup' | 'mask';
+export type PortalType = 'toast' | 'popup' | 'mask';
 type State = {
   key: number;
   portalList: { elem: ReactNode; key: number; type: PortalType }[];

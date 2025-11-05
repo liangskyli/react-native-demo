@@ -53,7 +53,7 @@ export const ToastHost = (props: ToastHostProps) => {
     >
       <Text
         className={cn(
-          'break-words text-center text-[14px] text-white',
+          'break-words text-center text-sm text-white',
           contentClassName,
         )}
       >

@@ -73,6 +73,7 @@ const Popup = (props: PopupProps) => {
   }, [insets.bottom, insets.left, insets.right, insets.top, mergedEdges]);
   return (
     <Mask
+      portalType="popup"
       {...maskProps}
       visible={visible}
       onMaskPress={maskClosable ? onClose : undefined}

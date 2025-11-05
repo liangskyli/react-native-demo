@@ -1,3 +1,4 @@
+import type { PortalType } from '@/components/portal/use-portal-store.ts';
 import { portalStore } from '@/components/portal/use-portal-store.ts';
 import { cn } from '@/styles/tool.ts';
 import type { ReactNode } from 'react';
@@ -21,6 +22,8 @@ type BaseMaskProps = {
    * 'view' - 直接渲染
    * 'modal' - 原生渲染*/
   renderMode?: 'portal' | 'view' | 'modal';
+  /** portalType, renderMode为portal时有效 */
+  portalType?: PortalType;
 };
 type MaskModalProps = Omit<ModalProps, 'children' | 'visible'>;
 export type MaskProps = BaseMaskProps & {
@@ -36,6 +39,7 @@ const Mask = (props: MaskProps) => {
     destroyOnClose,
     renderMode = 'portal',
     modalProps,
+    portalType = 'mask',
   } = props;
   const [isVisible, setIsVisible] = useState(false);
   const timeout = useRef<number>(null);
@@ -86,7 +90,7 @@ const Mask = (props: MaskProps) => {
 
       if (visible) {
         // 添加到 Portal
-        portalKeyRef.current = add(baseMask, 'mask');
+        portalKeyRef.current = add(baseMask, portalType);
       } else if (portalKeyRef.current !== null) {
         // 从 Portal 移除
         remove(portalKeyRef.current);
@@ -101,7 +105,7 @@ const Mask = (props: MaskProps) => {
         }
       };
     }
-  }, [baseMask, renderMode, visible]);
+  }, [baseMask, portalType, renderMode, visible]);
 
   // Portal 模式不渲染任何内容
   if (renderMode === 'portal') {
