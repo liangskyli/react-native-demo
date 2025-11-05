@@ -1,11 +1,16 @@
 import { cn } from '@/styles/tool.ts';
+import { cssInterop } from 'nativewind';
 import type { ReactNode } from 'react';
 import React from 'react';
 import type { TouchableHighlightProps } from 'react-native';
 import { Text, TouchableHighlight, View } from 'react-native';
 import LoadingIcon from '../loading/loading-icon.tsx';
 
-export type ButtonProps = TouchableHighlightProps & {
+export type ButtonProps = BaseButtonProps & {
+  /** 点击时的背景ClassName */
+  underlayColorClassName?: string;
+};
+type BaseButtonProps = TouchableHighlightProps & {
   /** 按钮类名 */
   className?: string;
   /** 按钮文本类名 */
@@ -17,7 +22,7 @@ export type ButtonProps = TouchableHighlightProps & {
   /** 加载图标类名 */
   loadingClassName?: string;
 };
-const Button = (props: ButtonProps) => {
+const BaseButton = (props: BaseButtonProps) => {
   const {
     className,
     textClassName,
@@ -62,4 +67,13 @@ const Button = (props: ButtonProps) => {
     </TouchableHighlight>
   );
 };
+const Button = cssInterop(BaseButton, {
+  /** 点击时的背景ClassName */
+  underlayColorClassName: {
+    target: false,
+    nativeStyleToProp: {
+      color: 'underlayColor',
+    },
+  },
+});
 export default Button;
