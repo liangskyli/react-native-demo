@@ -2,7 +2,7 @@ import type { PortalType } from '@/components/portal/use-portal-store.ts';
 import { portalStore } from '@/components/portal/use-portal-store.ts';
 import { cn } from '@/styles/tool.ts';
 import type { ReactNode } from 'react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import type { ModalProps, TouchableWithoutFeedbackProps } from 'react-native';
 import { Modal, Pressable, View } from 'react-native';
 
@@ -41,34 +41,14 @@ const Mask = (props: MaskProps) => {
     modalProps,
     portalType = 'mask',
   } = props;
-  const [isVisible, setIsVisible] = useState(false);
-  const timeout = useRef<number>(null);
   const portalKeyRef = useRef<number>(null);
-
-  useEffect(() => {
-    if (visible) {
-      // android闪耀，延迟显示
-      timeout.current = setTimeout(
-        () => setIsVisible(true),
-        0,
-      ) as unknown as number;
-    } else {
-      setIsVisible(false);
-    }
-    return () => {
-      if (timeout.current) {
-        clearTimeout(timeout.current);
-      }
-    };
-  }, [visible]);
 
   const baseMask = useMemo(
     () => (
       <>
         <Pressable
           className={cn(
-            'absolute inset-0 bg-black/70',
-            isVisible ? '' : 'hidden',
+            'absolute inset-0 h-full w-full bg-black/70',
             className,
           )}
           onPress={event => {
@@ -80,7 +60,7 @@ const Mask = (props: MaskProps) => {
         <View className="absolute inset-0">{children}</View>
       </>
     ),
-    [className, isVisible, onMaskPress, children],
+    [className, onMaskPress, children],
   );
 
   // Portal 模式：动态添加/移除元素

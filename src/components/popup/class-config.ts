@@ -8,7 +8,7 @@ const defaultConfig = {
       top: 'w-full top-0',
       left: ' h-full left-0',
       right: 'h-full right-0',
-      center: 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+      center: 'top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%]',
       none: '',
     },
   },
