@@ -26,7 +26,7 @@ export type PopupProps = {
   duration?: number;
   /** 蒙层属性 */
   maskProps?: Omit<MaskProps, 'visible' | 'children' | 'onMaskPress'>;
-  /** SafeScreen属性，默认没设置 */
+  /** SafeScreen属性 */
   edges?: Edge[];
 };
 

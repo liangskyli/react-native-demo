@@ -4,6 +4,7 @@ import { portalStore } from '@/components/portal/use-portal-store.ts';
 import classConfig from '@/components/toast/class-config.ts';
 import { cn } from '@/styles/tool.ts';
 import { merge } from 'lodash';
+import type { ReactNode } from 'react';
 import { Text } from 'react-native';
 
 const sleep = (time: number) => {
@@ -18,7 +19,7 @@ const sleep = (time: number) => {
 type ToastPosition = 'top' | 'bottom' | 'center';
 export type ToastHostProps = Pick<PopupProps, 'visible' | 'bodyClassName'> & {
   /** toast内容 */
-  content: string;
+  content: ReactNode;
   /** toast内容类名 */
   contentClassName?: string;
   /** toast位置 */
@@ -74,22 +75,17 @@ type CloseHandler = {
 };
 
 const show: (
-  content: string,
+  content: ReactNode,
   config?: Partial<ToastConfigProps>,
 ) => Promise<CloseHandler> = async (content, config) => {
   const mergedConfig = merge({}, currentConfig, config);
-  const { duration, afterClose, position, maskClickable } = mergedConfig;
+  const { duration, afterClose, ...otherConfig } = mergedConfig;
   const { add, remove, clear } = portalStore.getState();
 
   // 单例模式
   clear('toast');
   const key = add(
-    <ToastHost
-      content={content}
-      visible={true}
-      position={position}
-      maskClickable={maskClickable}
-    />,
+    <ToastHost {...otherConfig} content={content} visible={true} />,
     'toast',
   );
 
