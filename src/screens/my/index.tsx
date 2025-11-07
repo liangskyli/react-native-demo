@@ -1,3 +1,4 @@
+import AssetsImage from '@/components/assets-image';
 import Button from '@/components/button';
 import Checkbox from '@/components/checkbox';
 import Popup from '@/components/popup';
@@ -73,6 +74,11 @@ const MyScreen = (props: HomeTabScreenProps<Paths.my>) => {
     >
       <Text>This is top text.</Text>
       <View className="items-center gap-1">
+        <AssetsImage
+          path="test"
+          className="h-[calc(200/800*100vw)] w-[100vw] bg-black"
+          resizeMode="contain"
+        />
         <Text>my Screen</Text>
         <View className="flex-row items-center gap-2">
           <Switch value={switch1} onChange={setSwitch1} />
