@@ -86,16 +86,24 @@ const VirtualList = <T = any,>(props: VirtualListProps<T>) => {
   };
 
   const innerListHeaderComponent = () => {
-    return (
-      <>
-        {ListHeaderComponent}
-        {loadingTopRef.current &&
-          loadMoreContent({
+    if (loadingTopRef.current) {
+      return (
+        <>
+          {loadMoreContent({
             failed: failedTop,
             retry: () => doLoadMoreTop(true),
           })}
-      </>
-    );
+        </>
+      );
+    }
+    if (hasMoreTop) {
+      return null;
+    }
+    if (ListHeaderComponent && typeof ListHeaderComponent === 'function') {
+      return <ListHeaderComponent />;
+    }
+
+    return <>{ListHeaderComponent}</>;
   };
 
   const innerListFooterComponent = () => {
@@ -108,6 +116,9 @@ const VirtualList = <T = any,>(props: VirtualListProps<T>) => {
           })}
         </>
       );
+    }
+    if (hasMoreBottom) {
+      return null;
     }
     if (ListFooterComponent && typeof ListFooterComponent === 'function') {
       return <ListFooterComponent />;
