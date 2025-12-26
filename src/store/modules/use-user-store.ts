@@ -62,7 +62,7 @@ export const userStore = createStore<UserStore>()(
         state.loginData = { accessToken: '', userInfo: undefined };
         state.isLogin = false;
       });
-      baseStorage.delete(accessTokenKey);
+      baseStorage.remove(accessTokenKey);
     },
     initLoginStatus: async () => {
       let userInfo: State['loginData']['userInfo'];

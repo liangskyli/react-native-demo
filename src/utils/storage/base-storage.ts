@@ -1,8 +1,10 @@
-import { MMKV } from 'react-native-mmkv';
+import type { MMKV } from 'react-native-mmkv';
+import { createMMKV } from 'react-native-mmkv';
 
-const baseStorage = new MMKV({
+// @ts-ignore
+const baseStorage = new createMMKV({
   id: 'base-storage',
-});
+}) as MMKV;
 
 const baseStorageConfig = {
   accessToken: 'accessToken',
