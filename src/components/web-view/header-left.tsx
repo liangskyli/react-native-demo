@@ -25,7 +25,7 @@ const HeaderLeft = (props: HeaderLeftProps) => {
             webViewRef.current!.goBack();
           }}
         >
-          <AssetsImage path="back-icon" className="size-[21px]" />
+          <AssetsImage path="back-icon" className="h-[21px] w-[12px]" />
         </TouchableOpacity>
       )}
     </>
